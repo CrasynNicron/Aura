@@ -153,10 +153,12 @@ function animateAudio() {
 
     let average = sum / dataArray.length;
 
-    let scale = 1 + (average / 300);
+    let reactiveScale = 1 + (average / 400); // mais suave
     let glow = average * 2;
 
-    star.style.transform += ` scale(${scale})`;
+    // 👇 NÃO usamos transform!
+    star.style.scale = reactiveScale;
+
     star.style.filter = `
         drop-shadow(0px 0px ${glow}px #fde633)
         drop-shadow(0px 0px ${glow * 1.5}px #fde633)
