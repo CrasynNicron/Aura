@@ -1,11 +1,18 @@
-<!-- ===[ CSS ]=== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aura Sonhos</title>
+
 <style>
 body {
     margin: 0;
     background: #0a0a12;
     overflow: hidden;
+    font-family: Arial, sans-serif;
 }
 
+/* AUDIO BUTTON */
 #audioButton {
     position: fixed;
     top: 20px;
@@ -20,10 +27,36 @@ body {
     z-index: 999;
 }
 
-#audioButton:hover {
-    background: #1f2937;
+/* MINI PLAYER */
+#miniPlayer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(20,20,30,0.85);
+    backdrop-filter: blur(12px);
+    padding: 10px 15px;
+    border-radius: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    z-index: 9999;
 }
 
+#miniPlayer button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#miniPlayer input {
+    width: 80px;
+}
+
+/* SVG animation setup */
 .aura-sonhos-animation-star-wrapper {
     transform-box: fill-box;
     transform-origin: 52% 49%;
@@ -39,15 +72,24 @@ body {
     transform-origin: center bottom;
 }
 </style>
+</head>
 
-<!-- ===[ AUDIO BUTTON ]=== -->
+<body>
+
 <button id="audioButton">🎵 Enable Lofi Mode</button>
 
 <audio id="aura-music" loop>
     <source src="music/lofi.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ===[ SVG ]=== -->
+<!-- MINI PLAYER -->
+<div id="miniPlayer">
+    <button id="playPause">▶</button>
+    <button id="muteBtn">🔊</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.4">
+</div>
+
+<!-- SVG -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2650 2463" preserveAspectRatio="xMidYMid meet">
     <image class="aura-sonhos-animation-lori" href="images/aura.png" width="2650" height="2463"/>
     <g class="aura-sonhos-animation-star-wrapper">
@@ -55,7 +97,6 @@ body {
     </g>
 </svg>
 
-<!-- ===[ SCRIPT ]=== -->
 <script>
 const star = document.querySelector(".aura-sonhos-animation-star");
 const starWrapper = document.querySelector(".aura-sonhos-animation-star-wrapper");
@@ -63,62 +104,44 @@ const lori = document.querySelector(".aura-sonhos-animation-lori");
 const music = document.getElementById("aura-music");
 const button = document.getElementById("audioButton");
 
+const playPause = document.getElementById("playPause");
+const muteBtn = document.getElementById("muteBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+
 let audioContext;
 let analyser;
 let dataArray;
 
-// === TUA animação original (rotação estrela) ===
-var animation = new Animation(
+/* ORIGINAL ANIMATIONS */
+var rotateAnim = new Animation(
     new KeyframeEffect(
         starWrapper,
         { transform: ['rotate(-15deg)', 'rotate(7deg)'] },
-        {
-            duration: 1250,
-            fill: 'forwards',
-            easing: 'ease-in-out',
-            direction: 'alternate',
-            iterations: Infinity,
-        }
+        { duration: 1250, easing: 'ease-in-out', direction: 'alternate', iterations: Infinity }
     )
 );
 
-// === TUA animação original (subir/descer estrela) ===
-var animation2 = new Animation(
+var floatAnim = new Animation(
     new KeyframeEffect(
         star,
-        {
-            transform: ['translateY(-60px)', 'translateY(10px)']
-        },
-        {
-            duration: 2500,
-            fill: 'forwards',
-            easing: 'ease-in-out',
-            direction: 'alternate',
-            iterations: Infinity,
-        }
+        { transform: ['translateY(-60px)', 'translateY(10px)'] },
+        { duration: 2500, easing: 'ease-in-out', direction: 'alternate', iterations: Infinity }
     )
 );
 
-// === TUA animação original (respiração Lori) ===
-var scaleAnim = new Animation(
+var breatheAnim = new Animation(
     new KeyframeEffect(
         lori,
         { transform: ['scaleY(1)', 'scaleY(0.99)'] },
-        {
-            duration: 2000,
-            fill: 'forwards',
-            easing: 'ease-in-out',
-            direction: 'alternate',
-            iterations: Infinity,
-        }
+        { duration: 2000, easing: 'ease-in-out', direction: 'alternate', iterations: Infinity }
     )
 );
 
-animation.play();
-animation2.play();
-scaleAnim.play();
+rotateAnim.play();
+floatAnim.play();
+breatheAnim.play();
 
-// === AUDIO REACTIVE ===
+/* AUDIO SETUP */
 button.addEventListener("click", async () => {
 
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -130,30 +153,46 @@ button.addEventListener("click", async () => {
     source.connect(analyser);
     analyser.connect(audioContext.destination);
 
-    const bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
 
     music.volume = 0.4;
     music.play();
 
-    animateAudio();
-
     button.style.display = "none";
+    animateAudio();
 });
 
+/* MINI PLAYER CONTROLS */
+playPause.addEventListener("click", () => {
+    if (music.paused) {
+        music.play();
+        playPause.textContent = "⏸";
+    } else {
+        music.pause();
+        playPause.textContent = "▶";
+    }
+});
+
+muteBtn.addEventListener("click", () => {
+    music.muted = !music.muted;
+    muteBtn.textContent = music.muted ? "🔇" : "🔊";
+});
+
+volumeSlider.addEventListener("input", () => {
+    music.volume = volumeSlider.value;
+});
+
+/* AUDIO REACTIVE STAR */
 function animateAudio() {
     requestAnimationFrame(animateAudio);
 
     analyser.getByteFrequencyData(dataArray);
 
     let sum = 0;
-    for (let i = 0; i < dataArray.length; i++) {
-        sum += dataArray[i];
-    }
+    for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
 
     let average = sum / dataArray.length;
-
-    let reactiveScale = 1 + (average / 400); // mais suave
+    let reactiveScale = 1 + (average / 400);
     let glow = average * 2;
 
     star.style.scale = reactiveScale;
@@ -163,4 +202,17 @@ function animateAudio() {
         drop-shadow(0px 0px ${glow * 1.5}px #fde633)
     `;
 }
+
+/* PARALLAX (SEM QUEBRAR TRANSFORMS) */
+document.addEventListener("mousemove", (e) => {
+
+    const x = (e.clientX / window.innerWidth - 0.5);
+    const y = (e.clientY / window.innerHeight - 0.5);
+
+    lori.style.translate = `${x * 10}px ${y * 10}px`;
+    starWrapper.style.translate = `${x * 25}px ${y * 25}px`;
+});
 </script>
+
+</body>
+</html>
