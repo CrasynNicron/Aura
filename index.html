@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <link rel="icon" href="C:\Users\Adminstrador\Downloads\aura bot\favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura</title>
+  
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Material Symbols (para o coração) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 text-gray-900 dark:from-slate-900 dark:to-purple-900">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur">
+    <div class="max-w-screen-lg mx-auto px-4 flex h-16 items-center justify-between">
+      <a href="#" class="flex items-center gap-2 hover:scale-105 transition">
+  <img src="C:\Users\Adminstrador\Downloads\aura bot\aura11.png" class="w-8 h-8 rounded-full object-cover" alt="Logo Aura" />
+  <span class="font-bold text-xl bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Aura</span>
+</a>
+      <nav class="hidden md:flex gap-4 text-sm font-medium">
+        <a href="#features" class="hover:text-blue-400">Recursos</a>
+        <a href="#commands" class="hover:text-blue-400">Comandos</a>
+        <a href="#invite" class="hover:text-blue-400">Convidar</a>
+      </nav>
+      <div class="hidden md:flex gap-3">
+        <a href="https://discord.gg/R5VnN7Rn5H" target="_blank" class="px-3 py-2 border rounded hover:bg-gray-100">Suporte</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" target="_blank" class="px-3 py-2 rounded bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90">Adicionar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="py-20 bg-gradient-to-br from-blue-700 via-purple-700 to-blue-900 text-white">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-5xl font-bold mb-4">Conheça a Aura</h1>
+        <p class="mb-6">A assistente virtual que vai transformar o seu servidor de Discord com moderação avançada, economia e ferramentas de administração entre outras funcionalidades.</p>
+        <div class="flex gap-4">
+          <a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" class="px-6 py-3 rounded bg-white text-blue-700 hover:bg-blue-100 font-bold">Adicionar</a>
+<a href="#commands" class="px-6 py-3 border rounded text-white font-bold">
+  Ver Comandos
+</a>        </div>
+      </div>
+      <img src="C:\Users\Adminstrador\Downloads\aura bot\banneraura.png" class="rounded-lg mx-auto" alt="Aura banner">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-20 bg-slate-800/50 text-center">
+    <h2 class="text-4xl font-bold text-white mb-12">Alguns Recursos Poderosos</h2>
+    <div class="grid gap-8 max-w-6xl mx-auto px-6 md:grid-cols-4">
+      <div class="bg-slate-800 p-6 rounded-xl hover:-translate-y-2 transition">
+        <div class="text-4xl mb-4">🛠️</div>
+        <h3 class="text-xl text-white font-semibold">Utilidades</h3>
+        <p class="text-gray-400">Tudo o que você precisa em um só lugar.</p>
+      </div>
+      <div class="bg-slate-800 p-6 rounded-xl hover:-translate-y-2 transition">
+        <div class="text-4xl mb-4">💰</div>
+        <h3 class="text-xl text-white font-semibold">Economia & Níveis</h3>
+        <p class="text-gray-400">Moeda virtual e sistema de níveis progressivo.</p>
+      </div>
+      <div class="bg-slate-800 p-6 rounded-xl hover:-translate-y-2 transition">
+        <div class="text-4xl mb-4">🤡</div>
+        <h3 class="text-xl text-white font-semibold">Diversão</h3>
+        <p class="text-gray-400">Entretenimento sem limites na ponta dos dedos.</p>
+      </div>
+      <div class="bg-slate-800 p-6 rounded-xl hover:-translate-y-2 transition">
+        <div class="text-4xl mb-4">⚙️</div>
+        <h3 class="text-xl text-white font-semibold">Personalização</h3>
+        <p class="text-gray-400">Configure tudo ao seu gosto.</p>
+      </div>
+    </div>
+<a href="C:\Users\Adminstrador\Downloads\aura bot\recursos.html" 
+   class="px-6 py-3 border rounded text-white hover:bg-white hover:text-blue-700 block mx-auto w-fit mt-10 font-bold" target="_blank">
+  Ver Mais Recursos
+</a>
+  </section>
+
+  <!-- Commands -->
+  <section id="commands" class="py-20 bg-slate-900 text-white">
+    <h2 class="text-4xl font-bold text-center mb-12">Alguns Comandos</h2>
+    <div class="max-w-3xl mx-auto bg-slate-800 p-6 rounded-lg">
+      <div class="flex justify-between border-b border-slate-700 py-3"><code class="text-purple-400">/perfil_ver user: @Username</code><span>Ver o perfil de um utilizador específico</span></div>
+      <div class="flex justify-between border-b border-slate-700 py-3"><code class="text-purple-400">/aura pergunta: texto</code><span>Nosso sistema inteligente que responde às suas perguntas</span></div>
+      <div class="flex justify-between border-b border-slate-700 py-3"><code class="text-purple-400">/economia saldo</code><span>Exibe o saldo atual</span></div>
+      <div class="flex justify-between border-b border-slate-700 py-3"><code class="text-purple-400">/lembrete</code><span>Cria um lembrete personalizado com horas</span></div>
+      <div class="flex justify-between py-3"><code class="text-purple-400">/help</code><span>Mostra a lista de comandos disponíveis</span></div>
+    </div>
+<a href="C:\Users\Adminstrador\Downloads\aura bot\comandos.html" 
+   class="px-6 py-3 border rounded text-white hover:bg-white hover:text-blue-700 block mx-auto w-fit mt-10 font-bold" target="_blank">
+  Ver Mais Comandos
+</a>
+
+  <!-- Invite -->
+  <section id="invite" class="py-20 text-center">
+<h2 class="text-4xl font-bold mb-4 text-purple-300">Pronto para usar?</h2>
+<p class="mb-6 text-purple-300">Adicione a Aura ao seu servidor gratuitamente.</p>
+    <a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" target="_blank" class="px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:scale-105 transition">🎉 Adicionar Aura</a>
+  </section>
+
+     <!-- Footer -->
+  <footer class="bg-gray-100 dark:bg-zinc-950 text-gray-600 dark:text-gray-400 py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+  <img src="C:\Users\Adminstrador\Downloads\aura bot\aura11.png" class="w-8 h-8 rounded-full object-cover" alt="Logo Aura Bot" />
+  <h3 class="text-gray-900 dark:text-white text-xl font-bold">Aura</h3>
+</div>
+          <p class="mb-4 text-sm">Aura, a sua assistente dedicada. Projetada para trazer alegria e funcionalidade ao seu servidor, ela é a parceira ideal para todos os seus projetos.</p>
+        </div>
+        <div>
+          <h3 class="text-gray-900 dark:text-white font-medium mb-4">Navegação</h3>
+          <ul class="space-y-2">
+            <li><a href="#features" class="hover:text-blue-600 dark:hover:text-white">Recursos</a></li>
+            <li><a href="#commands" class="hover:text-blue-600 dark:hover:text-white">Comandos</a></li>
+            <li><a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" class="hover:text-blue-600 dark:hover:text-white">Convidar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-gray-900 dark:text-white font-medium mb-4">Suporte</h3>
+          <ul class="space-y-2">
+            <li><a href="https://discord.gg/R5VnN7Rn5H" class="hover:text-blue-600 dark:hover:text-white">Servidor de Suporte</a></li>
+            <li><a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" class="hover:text-blue-600 dark:hover:text-white">Adicionar ao Discord</a></li>
+            <li><a href="C:\Users\Adminstrador\Downloads\aura bot\termos.html" class="hover:text-blue-600 dark:hover:text-white">Termos e Serviço</a></li>
+            <li><a href="C:/Users/Adminstrador/Downloads/aura%20bot/privacidade.html" class="hover:text-blue-600 dark:hover:text-white">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-gray-900 dark:text-white font-medium mb-4">FAQ Rápido</h3>
+          <ul class="space-y-2">
+            <li><a href="#features" class="hover:text-blue-600 dark:hover:text-white">Como configurar a Aura?</a></li>
+            <li><a href="#commands" class="hover:text-blue-600 dark:hover:text-white">Quais comandos estão disponíveis?</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 dark:border-zinc-800 pt-8 pb-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+          <span>© 2025 Aura. Todos os direitos reservados.</span>
+          <p class="flex items-center gap-1">
+            Desenvolvido com 
+            <span class="material-symbols-outlined text-red-500">favorite</span>
+            por Yo_fred Studios
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

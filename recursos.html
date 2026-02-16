@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recursos - Aura</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" />
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 to-blue-50 text-gray-900 dark:from-slate-900 dark:to-purple-900">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur">
+    <div class="max-w-screen-lg mx-auto px-4 flex h-16 items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:scale-105 transition">
+        <img src="aura11.png" class="w-8 h-8 rounded-full object-cover" alt="Logo Aura" />
+        <span class="font-bold text-xl bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Aura</span>
+      </a>
+      <nav class="hidden md:flex gap-4 text-sm font-medium">
+        <a href="recursos.html" class="text-blue-500 font-bold">Recursos</a>
+        <a href="comandos.html" class="hover:text-blue-400">Comandos</a>
+        <a href="index.html#invite" class="hover:text-blue-400">Convidar</a>
+      </nav>
+      <div class="hidden md:flex gap-3">
+        <a href="https://discord.gg/R5VnN7Rn5H" target="_blank" class="px-3 py-2 border rounded hover:bg-gray-100">Suporte</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" target="_blank" class="px-3 py-2 rounded bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:opacity-90">Adicionar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <div class="flex flex-1">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white/80 dark:bg-slate-900/70 backdrop-blur border-r hidden md:block">
+      <div class="p-6">
+        <h2 class="font-bold text-lg mb-4 text-gray-700 dark:text-gray-300">Categorias</h2>
+        <ul id="categoryMenu" class="space-y-2">
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="all">📋 Todos</button></li>
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="admin">⚙️ Administração</button></li>
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="util">🛠️ Utilidades</button></li>
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="eco">💰 Economia</button></li>
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="fun">🎉 Diversão</button></li>
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="custom">⚙️ Personalização</button></li>
+          <li><button class="w-full text-left px-3 py-2 rounded text-white hover:text-white" data-category="security">🛡️ Segurança</button></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Área de Recursos -->
+    <main class="flex-1 py-10 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-white">Recursos da Aura</h1>
+
+        <!-- Barra de pesquisa -->
+        <div class="mb-8">
+          <input id="searchInput" type="text" placeholder="🔍 Buscar recurso..." 
+            class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-slate-800 dark:border-slate-700 dark:text-white" />
+        </div>
+
+        <!-- Grid de recursos -->
+        <div id="resourcesGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Administração -->
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="admin">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Sistema de Moderação</h3>
+            <p class="text-gray-600 dark:text-gray-400">Comandos para banir, mutar e gerenciar usuários com facilidade.</p>
+          </div>
+
+          <!-- Utilidades -->
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="util">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Lembretes Inteligentes</h3>
+            <p class="text-gray-600 dark:text-gray-400">Crie lembretes automáticos para organizar o servidor.</p>
+          </div>
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="util">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Perfil de Usuário</h3>
+            <p class="text-gray-600 dark:text-gray-400">Sistema de perfis customizáveis para cada membro.</p>
+          </div>
+
+          <!-- Economia -->
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="eco">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Economia Virtual</h3>
+            <p class="text-gray-600 dark:text-gray-400">Sistema de moedas, recompensas diárias e itens virtuais.</p>
+          </div>
+
+          <!-- Diversão -->
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="fun">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Minijogos</h3>
+            <p class="text-gray-600 dark:text-gray-400">Jogos divertidos e interativos para engajar os membros.</p>
+          </div>
+
+          <!-- Personalização -->
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="custom">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Configuração Avançada</h3>
+            <p class="text-gray-600 dark:text-gray-400">Personalize prefixos, mensagens automáticas e comportamento da Aura.</p>
+          </div>
+
+          <!-- Segurança -->
+          <div class="resource-card bg-white dark:bg-slate-800 p-6 rounded-lg shadow" data-category="security">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">Proteção Antispam</h3>
+            <p class="text-gray-600 dark:text-gray-400">Sistema automático contra flood e spam no servidor.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+   <!-- Script de interatividade -->
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const resourceCards = document.querySelectorAll(".resource-card");
+    const categoryButtons = document.querySelectorAll("#categoryMenu button");
+
+    // Filtro por pesquisa
+    searchInput.addEventListener("input", () => {
+      const value = searchInput.value.toLowerCase();
+      resourceCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(value) ? "block" : "none";
+      });
+    });
+
+    // Filtro por categoria
+    categoryButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const category = btn.dataset.category;
+        resourceCards.forEach(card => {
+          card.style.display = (category === "all" || card.dataset.category === category) ? "block" : "none";
+        });
+      });
+    });
+  </script>
+   <!-- Footer -->
+  <footer class="bg-gray-100 dark:bg-zinc-950 text-gray-600 dark:text-gray-400 py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+  <img src="C:\Users\Adminstrador\Downloads\aura bot\aura11.png" class="w-8 h-8 rounded-full object-cover" alt="Logo Aura Bot" />
+  <h3 class="text-gray-900 dark:text-white text-xl font-bold">Aura</h3>
+</div>
+          <p class="mb-4 text-sm">Aura, a sua assistente dedicada. Projetada para trazer alegria e funcionalidade ao seu servidor, ela é a parceira ideal para todos os seus projetos.</p>
+        </div>
+        <div>
+          <h3 class="text-gray-900 dark:text-white font-medium mb-4">Navegação</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html#features" class="hover:text-blue-600 dark:hover:text-white">Recursos</a></li>
+            <li><a href="index.html#commands" class="hover:text-blue-600 dark:hover:text-white">Comandos</a></li>
+            <li><a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" class="hover:text-blue-600 dark:hover:text-white">Convidar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-gray-900 dark:text-white font-medium mb-4">Suporte</h3>
+          <ul class="space-y-2">
+            <li><a href="https://discord.gg/R5VnN7Rn5H" class="hover:text-blue-600 dark:hover:text-white">Servidor de Suporte</a></li>
+            <li><a href="https://discord.com/oauth2/authorize?client_id=1416558263637639269" class="hover:text-blue-600 dark:hover:text-white">Adicionar ao Discord</a></li>
+            <li><a href="C:\Users\Adminstrador\Downloads\aura bot\termos.html" class="hover:text-blue-600 dark:hover:text-white">Termos e Serviço</a></li>
+            <li><a href="C:/Users/Adminstrador/Downloads/aura%20bot/privacidade.html" class="hover:text-blue-600 dark:hover:text-white">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-gray-900 dark:text-white font-medium mb-4">FAQ Rápido</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html#features" class="hover:text-blue-600 dark:hover:text-white">Como configurar a Aura?</a></li>
+            <li><a href="index.html#commands" class="hover:text-blue-600 dark:hover:text-white">Quais comandos estão disponíveis?</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 dark:border-zinc-800 pt-8 pb-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+          <span>© 2025 Aura. Todos os direitos reservados.</span>
+          <p class="flex items-center gap-1">
+            Desenvolvido com 
+            <span class="material-symbols-outlined text-red-500">favorite</span>
+            por Yo_fred Studios
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
