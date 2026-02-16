@@ -1,0 +1,81 @@
+<!-- ===[ CSS ]=== -->
+<style>
+.aura-sonhos-animation-star-wrapper {
+    transform-box: fill-box;
+    transform-origin: 52% 49%;
+}
+
+.aura-sonhos-animation-star {
+    transform-box: fill-box;
+    transform-origin: 52% 49%;
+}
+
+.aura-sonhos-animation-lori {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+}
+</style>
+
+<!-- ===[ SVG ]=== -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2650 2463" preserveAspectRatio="xMidYMid meet">
+    <image class="aura-sonhos-animation-lori" href="C:\Users\Adminstrador\Downloads\aura bot\aura.png" width="2650" height="2463"/>
+    <g class="aura-sonhos-animation-star-wrapper">
+        <image class="aura-sonhos-animation-star" href="C:\Users\Adminstrador\Downloads\aura bot\star.png" width="341" height="347" x="1900" y="620"/>
+    </g>
+</svg>
+
+<!-- ===[ SCRIPT ]=== -->
+<script>
+var animation = new Animation(
+    new KeyframeEffect(
+        document.querySelector(".aura-sonhos-animation-star-wrapper"),
+        {
+            transform: ['rotate(-15deg)', 'rotate(7deg)']
+        },
+        {
+            duration: 1250,
+            fill: 'forwards',
+            easing: 'ease-in-out',
+            direction: 'alternate',
+            iterations: Infinity,
+        }
+    )
+)
+
+var animation2 = new Animation(
+    new KeyframeEffect(
+        document.querySelector(".aura-sonhos-animation-star"),
+        {
+            transform: ['translateY(-60px)', 'translateY(10px)'],
+            filter: ['drop-shadow(0px 0px 50px #fde6338f)', 'drop-shadow(0px 0px 50px #fde6338f) drop-shadow(0px 0px 100px #fde6338f) drop-shadow(0px 0px 150px #fde6338f)']
+        },
+        {
+            duration: 2500,
+            fill: 'forwards',
+            easing: 'ease-in-out',
+            direction: 'alternate',
+            iterations: Infinity,
+        }
+    )
+)
+
+var scale = new Animation(
+    new KeyframeEffect(
+        document.querySelector(".aura-sonhos-animation-lori"),
+        {
+            transform: ['scaleY(100%)', 'scaleY(99%)'],
+        },
+        {
+            duration: 2000,
+            fill: 'forwards',
+            easing: 'ease-in-out',
+            direction: 'alternate',
+            iterations: Infinity,
+        }
+    )
+)
+
+animation.play()
+animation2.play()
+scale.play()
+</script>
