@@ -44,7 +44,7 @@ body {
 <button id="audioButton">🎵 Enable Lofi Mode</button>
 
 <audio id="aura-music" loop>
-    <source src="https://github.com/CrasynNicron/Aura/raw/refs/heads/main/music/lofi.mp3" type="audio/mpeg">
+    <source src="music/lofi.mp3" type="audio/mpeg">
 </audio>
 
 <!-- ===[ SVG ]=== -->
@@ -156,7 +156,6 @@ function animateAudio() {
     let reactiveScale = 1 + (average / 400); // mais suave
     let glow = average * 2;
 
-    // 👇 NÃO usamos transform!
     star.style.scale = reactiveScale;
 
     star.style.filter = `
