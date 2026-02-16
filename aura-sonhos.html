@@ -1,5 +1,29 @@
 <!-- ===[ CSS ]=== -->
 <style>
+body {
+    margin: 0;
+    background: #0a0a12;
+    overflow: hidden;
+}
+
+#audioButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background: #111827;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 999;
+}
+
+#audioButton:hover {
+    background: #1f2937;
+}
+
 .aura-sonhos-animation-star-wrapper {
     transform-box: fill-box;
     transform-origin: 52% 49%;
@@ -16,22 +40,38 @@
 }
 </style>
 
+<!-- ===[ AUDIO BUTTON ]=== -->
+<button id="audioButton">🎵 Enable Lofi Mode</button>
+
+<audio id="aura-music" loop>
+    <source src="music/lofi.mp3" type="audio/mpeg">
+</audio>
+
 <!-- ===[ SVG ]=== -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2650 2463" preserveAspectRatio="xMidYMid meet">
-    <image class="aura-sonhos-animation-lori" href="C:\Users\Adminstrador\Downloads\aura bot\aura.png" width="2650" height="2463"/>
+    <image class="aura-sonhos-animation-lori" href="images/aura.png" width="2650" height="2463"/>
     <g class="aura-sonhos-animation-star-wrapper">
-        <image class="aura-sonhos-animation-star" href="C:\Users\Adminstrador\Downloads\aura bot\star.png" width="341" height="347" x="1900" y="620"/>
+        <image class="aura-sonhos-animation-star" href="images/star.png" width="341" height="347" x="1900" y="620"/>
     </g>
 </svg>
 
 <!-- ===[ SCRIPT ]=== -->
 <script>
+const star = document.querySelector(".aura-sonhos-animation-star");
+const starWrapper = document.querySelector(".aura-sonhos-animation-star-wrapper");
+const lori = document.querySelector(".aura-sonhos-animation-lori");
+const music = document.getElementById("aura-music");
+const button = document.getElementById("audioButton");
+
+let audioContext;
+let analyser;
+let dataArray;
+
+// === TUA animação original (rotação estrela) ===
 var animation = new Animation(
     new KeyframeEffect(
-        document.querySelector(".aura-sonhos-animation-star-wrapper"),
-        {
-            transform: ['rotate(-15deg)', 'rotate(7deg)']
-        },
+        starWrapper,
+        { transform: ['rotate(-15deg)', 'rotate(7deg)'] },
         {
             duration: 1250,
             fill: 'forwards',
@@ -40,14 +80,14 @@ var animation = new Animation(
             iterations: Infinity,
         }
     )
-)
+);
 
+// === TUA animação original (subir/descer estrela) ===
 var animation2 = new Animation(
     new KeyframeEffect(
-        document.querySelector(".aura-sonhos-animation-star"),
+        star,
         {
-            transform: ['translateY(-60px)', 'translateY(10px)'],
-            filter: ['drop-shadow(0px 0px 50px #fde6338f)', 'drop-shadow(0px 0px 50px #fde6338f) drop-shadow(0px 0px 100px #fde6338f) drop-shadow(0px 0px 150px #fde6338f)']
+            transform: ['translateY(-60px)', 'translateY(10px)']
         },
         {
             duration: 2500,
@@ -57,14 +97,13 @@ var animation2 = new Animation(
             iterations: Infinity,
         }
     )
-)
+);
 
-var scale = new Animation(
+// === TUA animação original (respiração Lori) ===
+var scaleAnim = new Animation(
     new KeyframeEffect(
-        document.querySelector(".aura-sonhos-animation-lori"),
-        {
-            transform: ['scaleY(100%)', 'scaleY(99%)'],
-        },
+        lori,
+        { transform: ['scaleY(1)', 'scaleY(0.99)'] },
         {
             duration: 2000,
             fill: 'forwards',
@@ -73,9 +112,54 @@ var scale = new Animation(
             iterations: Infinity,
         }
     )
-)
+);
 
-animation.play()
-animation2.play()
-scale.play()
+animation.play();
+animation2.play();
+scaleAnim.play();
+
+// === AUDIO REACTIVE ===
+button.addEventListener("click", async () => {
+
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioContext.createMediaElementSource(music);
+
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    const bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+
+    music.volume = 0.4;
+    music.play();
+
+    animateAudio();
+
+    button.style.display = "none";
+});
+
+function animateAudio() {
+    requestAnimationFrame(animateAudio);
+
+    analyser.getByteFrequencyData(dataArray);
+
+    let sum = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+        sum += dataArray[i];
+    }
+
+    let average = sum / dataArray.length;
+
+    let scale = 1 + (average / 300);
+    let glow = average * 2;
+
+    star.style.transform += ` scale(${scale})`;
+    star.style.filter = `
+        drop-shadow(0px 0px ${glow}px #fde633)
+        drop-shadow(0px 0px ${glow * 1.5}px #fde633)
+    `;
+}
 </script>
