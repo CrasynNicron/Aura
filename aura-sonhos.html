@@ -12,21 +12,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* AUDIO BUTTON */
-#audioButton {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 18px;
-    background: #111827;
-    color: white;
-    border: 1px solid #333;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    z-index: 999;
-}
-
 /* MINI PLAYER */
 #miniPlayer {
     position: fixed;
@@ -76,8 +61,6 @@ body {
 
 <body>
 
-<button id="audioButton">🎵 Enable Lofi Mode</button>
-
 <audio id="aura-music" loop>
     <source src="music/lofi.mp3" type="audio/mpeg">
 </audio>
@@ -102,7 +85,6 @@ const star = document.querySelector(".aura-sonhos-animation-star");
 const starWrapper = document.querySelector(".aura-sonhos-animation-star-wrapper");
 const lori = document.querySelector(".aura-sonhos-animation-lori");
 const music = document.getElementById("aura-music");
-const button = document.getElementById("audioButton");
 
 const playPause = document.getElementById("playPause");
 const muteBtn = document.getElementById("muteBtn");
@@ -111,6 +93,7 @@ const volumeSlider = document.getElementById("volumeSlider");
 let audioContext;
 let analyser;
 let dataArray;
+let audioInitialized = false;
 
 /* ORIGINAL ANIMATIONS */
 var rotateAnim = new Animation(
@@ -141,29 +124,26 @@ rotateAnim.play();
 floatAnim.play();
 breatheAnim.play();
 
-/* AUDIO SETUP */
-button.addEventListener("click", async () => {
+/* MINI PLAYER CONTROLS + AUDIO INIT */
+playPause.addEventListener("click", async () => {
 
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const source = audioContext.createMediaElementSource(music);
+    if (!audioInitialized) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createMediaElementSource(music);
 
-    analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
 
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
 
-    dataArray = new Uint8Array(analyser.frequencyBinCount);
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+        music.volume = 0.4;
 
-    music.volume = 0.4;
-    music.play();
+        audioInitialized = true;
+        animateAudio();
+    }
 
-    button.style.display = "none";
-    animateAudio();
-});
-
-/* MINI PLAYER CONTROLS */
-playPause.addEventListener("click", () => {
     if (music.paused) {
         music.play();
         playPause.textContent = "⏸";
@@ -186,6 +166,8 @@ volumeSlider.addEventListener("input", () => {
 function animateAudio() {
     requestAnimationFrame(animateAudio);
 
+    if (!analyser) return;
+
     analyser.getByteFrequencyData(dataArray);
 
     let sum = 0;
@@ -203,7 +185,7 @@ function animateAudio() {
     `;
 }
 
-/* PARALLAX (SEM QUEBRAR TRANSFORMS) */
+/* PARALLAX */
 document.addEventListener("mousemove", (e) => {
 
     const x = (e.clientX / window.innerWidth - 0.5);
