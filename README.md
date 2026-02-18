@@ -35,7 +35,7 @@ This repository contains the source code, configuration, and assets used to buil
 
 Clone the repository:
 
-``` git clone https://github.com/your-username/aura.git ```
+``` git clone https://github.com/CrasynNicron/aura.git ```
 
 
 Navigate into the project folder:
